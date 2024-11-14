@@ -1,0 +1,177 @@
+/* Global reset to remove default margin, padding, and set box-sizing to border-box for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Set default font to Arial */
+}
+
+/* Body styles */
+body {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 100vh; /* Set height to 100% of the viewport */
+    background-color: #f2f2f2; /* Light gray background color */
+}
+
+/* Main container holding both left and right sections */
+.container {
+    display: flex; /* Use flexbox for horizontal layout */
+    width: 80%; /* Set container width to 80% of the viewport */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Hide content that overflows the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+}
+
+/* Left section with image background */
+.left {
+    width: 50%; /* Set width to 50% of the container */
+    position: relative; /* Allow for absolute positioning of overlay */
+    margin-bottom: 25px; /* Add space below */
+    margin-left: 25px; /* Add space on the left side */
+}
+
+/* Style the background image */
+.background-img {
+    width: 100%; /* Make image span the full width of the container */
+    height: 100%; /* Make image span the full height of the container */
+    object-fit: cover; /* Ensure the image covers the entire area without distorting */
+}
+
+/* Overlay on top of the image with text */
+.overlay {
+    position: absolute; /* Position it absolutely within the left section */
+    bottom: -25px; /* Move overlay down by 25px */
+    left: -25px; /* Move overlay left by 25px */
+    color: #fff; /* White text color */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    padding: 20px; /* Padding inside the overlay */
+    width: 100%; /* Make overlay span the full width */
+    height: 40%; /* Set overlay height to 40% of the parent element */
+}
+
+/* Styling for the overlay's header (title) */
+.overlay h1 {
+    font-size: 54px; /* Large font size for the title */
+    margin-bottom: 10px; /* Space below the title */
+    text-align: center; /* Center the title */
+}
+
+/* Add a decorative line below the header */
+.overlay h1::after {
+    content: ""; /* Empty content for the line */
+    display: block; /* Make it a block element */
+    width: 50px; /* Set the width of the line */
+    height: 4px; /* Set the height of the line */
+    background-color: #ffffff; /* White color for the line */
+    margin: 10px auto; /* Center the line and add margin above and below */
+}
+
+/* Paragraph inside the overlay */
+.overlay p {
+    font-size: 16px; /* Set the font size */
+    line-height: 1.5; /* Set line height for readability */
+    margin-top: 10px; /* Add margin at the top */
+    color: #b0b0b0; /* Light gray color for the text */
+    width: 80%; /* Set width to 80% for better spacing */
+    text-align: center; /* Center the text */
+    margin-left: 50px; /* Add left margin for alignment */
+}
+
+/* Right section styles */
+.right {
+    position: relative; /* For absolute positioning of elements like buttons */
+    padding: 70px; /* Add padding inside the right section */
+    width: 50%; /* Set width to 50% */
+    background-color: #fff; /* White background */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange children vertically */
+    justify-content: center; /* Center the content vertically */
+}
+
+/* Text styling for paragraphs in the right section */
+.right p {
+    color: #666; /* Gray color for text */
+    font-size: 14px; /* Smaller font size */
+    margin-bottom: 20px; /* Add space below each paragraph */
+}
+
+/* Form styling */
+form {
+    display: flex; /* Use flexbox for form layout */
+    flex-direction: column; /* Arrange input fields vertically */
+}
+
+/* Style for the name input fields (first name and last name) */
+.name-fields {
+    display: flex; /* Use flexbox for horizontal layout */
+    gap: 10px; /* Add space between the fields */
+}
+
+/* Styling for text, email, and password input fields */
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 10px; /* Add padding inside the input fields */
+    margin-bottom: 30px; /* Add space below each input field */
+    border: 1px solid #ddd; /* Light gray border for inputs */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Set font size */
+    width: 100%; /* Make inputs span the full width of the container */
+}
+
+/* Button styling */
+button {
+    padding: 10px; /* Add padding inside the button */
+    background-color: #6200ea; /* Purple background color */
+    color: #fff; /* White text color */
+    font-size: 16px; /* Set font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #4500b5; /* Darken the background color on hover */
+}
+
+/* Styling for error messages */
+.error {
+    color: red; /* Red text color for error messages */
+    font-size: 0.8rem; /* Smaller font size */
+    display: block; /* Make the error message block-level */
+}
+
+/* Sign-in button styling */
+.sign-in-btn {
+    position: absolute; /* Position it absolutely in the right section */
+    top: 20px; /* Position 20px from the top */
+    right: 70px; /* Position 70px from the right */
+    background-color: transparent; /* Transparent background */
+    border: 2px solid #6C63FF; /* Purple border */
+    color: #6C63FF; /* Purple text color */
+    padding: 3px 20px; /* Padding inside the button */
+    font-size: 16px; /* Set font size */
+    cursor: pointer; /* Change cursor to pointer */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the sign-in button */
+.sign-in-btn:hover {
+    background-color: #6C63FF; /* Purple background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+/* Heading styling for the right section */
+.right h2 {
+    margin: 0 0 20px; /* Add space below the heading */
+    font-size: 33px; /* Set larger font size */
+    color: #3b3b98; /* Dark purple color for the heading */
+}
+
+/* Additional paragraph styling in the right section */
+.right p {
+    margin: 0 0 40px; /* Add space below the paragraph */
+    color: #3b3b98; /* Dark purple color for text */
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding for the document -->
+    <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the page that appears on the browser tab -->
+    <title>Altitude Air</title>
+    <!-- Link to the external CSS file for styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left section of the page with an image and overlay text -->
+        <div class="left">
+            <!-- Background image for the left section -->
+            <img src="image.jpg" alt="Plane Wing" class="background-img">
+            <div class="overlay">
+                <!-- Title and description for the company -->
+                <h1>Altitude Air</h1>
+                <p>We promise to ensure that your well-being is taken care of while traveling with us. Boasting top in class fleet inventory and a 5-star approval for our in-flight experience, you know you're getting the best from Altitude with no attitude.</p>
+            </div>
+        </div>
+
+        <!-- Right section of the page with the sign-in button, heading, and registration form -->
+        <div class="right">
+            <!-- Button for signing in -->
+            <button class="sign-in-btn">Sign In</button>
+            <!-- Heading for the registration section -->
+            <h2>Explore & Experience</h2>
+            <p>Get onto your most comfortable journey yet. All the way up.</p>
+
+            <!-- Registration form -->
+            <form id="registrationForm">
+                <!-- Fields for first name and last name -->
+                <div class="name-fields">
+                    <input type="text" name="firstName" placeholder="First Name" required>
+                    <input type="text" name="lastName" placeholder="Last Name" required>
+                </div>
+                <!-- Other registration fields -->
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                <!-- Submit button for the form -->
+                <button type="submit">Get Started</button>
+
+                <!-- Div to display error messages -->
+                <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript for form validation and submission -->
+    <script>
+        // Event listener for the form submit action
+        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Array to collect any error messages
+            const errorMessages = [];
+            
+            // Retrieve values from the form fields
+            const firstName = e.target.firstName.value.trim();
+            const lastName = e.target.lastName.value.trim();
+            const email = e.target.email.value.trim();
+            const username = e.target.username.value.trim();
+            const password = e.target.password.value;
+            const confirmPassword = e.target.confirmPassword.value;
+
+            // Validation checks for each field
+            if (firstName === "") errorMessages.push("First name is required.");
+            if (lastName === "") errorMessages.push("Last name is required.");
+
+            // Email validation using a regular expression
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                errorMessages.push("Please enter a valid email address.");
+            }
+
+            // Username validation
+            if (username === "") errorMessages.push("Username is required.");
+
+            // Password validation (minimum length of 6 characters)
+            if (password.length < 6) {
+                errorMessages.push("Password must be at least 6 characters long.");
+            }
+
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                errorMessages.push("Passwords do not match.");
+            }
+
+            // If there are error messages, display them in the error message div
+            const errorMessagesDiv = document.getElementById("errorMessages");
+            if (errorMessages.length > 0) {
+                errorMessagesDiv.innerHTML = errorMessages.join("<br>");
+                return; // Stop form submission if there are errors
+            } else {
+                errorMessagesDiv.innerHTML = ""; // Clear any previous error messages
+            }
+
+            // Create an object to send to the server
+            const formData = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                username: username,
+                password: password,
+            };
+
+            // Send the form data to the server via a POST request
+            try {
+                const response = await fetch('http://localhost:3003/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData), // Send form data as JSON
+                });
+                const result = await response.json();
+                alert(result.message); // Display server response message
+                e.target.reset(); // Optionally clear the form fields after successful registration
+            } catch (error) {
+                console.error('Error:', error); // Log error if something goes wrong
+                alert('An error occurred during registration.'); // Alert user if there's an error
+            }
+        });
+    </script>
+</body>
+</html>
